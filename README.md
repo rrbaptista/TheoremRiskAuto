@@ -2,7 +2,7 @@
 
 TheoremRisk - Seguro Auto - Versão 1.0
 
-Esse é um projeto independente e de código aberto constituído de um conjunto de scripts na linguagem R para calcular prêmios de seguro auto ao consumidor final e estatísticas com base nos datasets disponibilizados pelo sistema Autoseg da SUSEP - Superintendência de Seguros Privados.
+Esse é um projeto independente constituído de um conjunto de scripts na linguagem R para calcular prêmios de seguro auto ao consumidor final e estatísticas com base nos datasets disponibilizados pelo sistema Autoseg da SUSEP - Superintendência de Seguros Privados.
 
 O sistema Autoseg disponibiliza dados e informações sobre as apólices de seguro auto vigentes de todo o mercado brasileiro a cada semestre sob a forma de datasets em .csv. Acesse em https://www2.susep.gov.br/menuestatistica/autoseg/principal.aspx
 
