@@ -6,7 +6,7 @@ Esse é um projeto independente e de código aberto constituído de um conjunto 
 
 O sistema Autoseg disponibiliza dados e informações sobre as apólices de seguro auto vigentes de todo o mercado brasileiro a cada semestre sob a forma de datasets em .csv. Acesse em https://www2.susep.gov.br/menuestatistica/autoseg/principal.aspx
 
-Para usar esses scripts, baixe datasets por meio do link acima ou use o que se encontra nesse projeto (arq_casco_comp2019.csv). 
+Para usar esses scripts, baixe datasets por meio do link acima. 
 
 Os scripts desse projeto foram escritos para lerem e analisarem o dataset 'arq_casco_comp.csv', que contém dados de exposição, prêmios, sinistros e importância segurada para a cobertura de Casco, elencados pelos critérios Categoria Tarifária/Região/Modelo/Ano/Sexo/Faixa Etária. Outros datasets do conjunto não funcionarão por enquanto, mas quando possível irei implementar código novo para analisá-los.
 
