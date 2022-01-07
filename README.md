@@ -23,7 +23,7 @@ Para usar os scripts desse projeto, é necessário que o seu sistema operacional
 `parametros.csv`: parâmetros que os scripts `calculos_geral.R` e `calculos_modelos.R` utilizarão para o cálculo dos prêmios ao consumidor final. Manter os nomes dos parâmetros inalterados, apenas modifique os valores da segunda coluna de acordo com a sua preferência antes de executar `atuarial_geral.R` ou `atuarial_modelos.R`.
 
 `margem_seguranca`: margem de segurança para evitar prejuízos por desvios bruscos ou altas repentinas de sinistralidade. Valor em %
-`carregamento`: índice de carregamento, compreendendo despesas administrativas, margem de lucro e impostos indiretos. Valor em % 
+`carregamento`: carregamento, compreendendo despesas administrativas, comissionamento do corretor, margem de lucro e impostos indiretos. Valor em % 
 `iof`: Imposto sobre Operações Financeiras vigente para os seguros de acordo com a legislação tributária. Valor em %
 
 `atuarial_geral.R`: calcula os prêmios de risco para cada uma das coberturas (Roubo e Furto, Colisão Perda Parcial, Colisão Perda Total, Incêndio e Assistência 24H), armazena-os em tabelas na memória, e compila estatísticas do dataset para o arquivo `estatisticas_geral.csv`.
