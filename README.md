@@ -1,4 +1,4 @@
-## Seguro Auto
+## Theorem Risk - Seguro Auto
 
 Os scripts para o ramo Auto calculam prêmios de seguro e estatísticas com base nos datasets disponibilizados pelo sistema Autoseg da SUSEP - Superintendência de Seguros Privados.
 
