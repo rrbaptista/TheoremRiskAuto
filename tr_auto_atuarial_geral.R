@@ -1,3 +1,4 @@
+library(readr)
 
 #Lê argumento da linha de comando com o dataset a ser tratado
 argumentos <- commandArgs(trailingOnly = TRUE)
@@ -12,38 +13,43 @@ message("TheoremRisk - Seguro Auto - Versão 1.0")
 message("-------------------------------------------")
 message(cat("Lendo e analisando os dados do dataset", argumentos[1]))
 message("Isso pode durar alguns minutos, aguarde.")
-arq_casco_comp <- read.csv(argumentos[1])
+
+arq_casco_comp <- read_delim(argumentos[1], 
+                             delim = ";", escape_double = FALSE, 
+                             locale = locale(decimal_mark = ",", 
+                                             grouping_mark = "."), 
+                             trim_ws = TRUE)
 
 #Total de registros do dataset
 carteira <- nrow(arq_casco_comp)
 
 #Roubo e Furto
-soma_freq1 <- sum(arq_casco_comp$FREQ_SIN1+1)
-soma_indeniz1 <- sum(arq_casco_comp$INDENIZ1)
+soma_freq1 <- sum(arq_casco_comp$FREQ_SIN1+1, na.rm = TRUE)
+soma_indeniz1 <- sum(arq_casco_comp$INDENIZ1, na.rm = TRUE)
 premio_risco1 <- (soma_freq1/carteira) * (soma_indeniz1/soma_freq1)
 
 #Colisão Parcial
-soma_freq2 <- sum(arq_casco_comp$FREQ_SIN2+1)
-soma_indeniz2 <- sum(arq_casco_comp$INDENIZ2)
+soma_freq2 <- sum(arq_casco_comp$FREQ_SIN2+1, na.rm = TRUE)
+soma_indeniz2 <- sum(arq_casco_comp$INDENIZ2, na.rm = TRUE)
 premio_risco2 <- (soma_freq2/carteira) * (soma_indeniz2/soma_freq2)
 
 #Colisão Perda Total
-soma_freq3 <- sum(arq_casco_comp$FREQ_SIN3+1)
-soma_indeniz3 <- sum(arq_casco_comp$INDENIZ3)
+soma_freq3 <- sum(arq_casco_comp$FREQ_SIN3+1, na.rm = TRUE)
+soma_indeniz3 <- sum(arq_casco_comp$INDENIZ3, na.rm = TRUE)
 premio_risco3 <- (soma_freq3/carteira) * (soma_indeniz3/soma_freq3)
 
 #Incêndio
-soma_freq4 <- sum(arq_casco_comp$FREQ_SIN4+1)
-soma_indeniz4 <- sum(arq_casco_comp$INDENIZ4)
+soma_freq4 <- sum(arq_casco_comp$FREQ_SIN4+1, na.rm = TRUE)
+soma_indeniz4 <- sum(arq_casco_comp$INDENIZ4, na.rm = TRUE)
 premio_risco4 <- (soma_freq4/carteira) * (soma_indeniz4/soma_freq4)
 
 #Assistência 24H
-soma_freq9 <- sum(arq_casco_comp$FREQ_SIN9+1)
-soma_indeniz9 <- sum(arq_casco_comp$INDENIZ9)
+soma_freq9 <- sum(arq_casco_comp$FREQ_SIN9+1, na.rm = TRUE)
+soma_indeniz9 <- sum(arq_casco_comp$INDENIZ9, na.rm = TRUE)
 premio_risco9 <- (soma_freq9/carteira) * (soma_indeniz9/soma_freq9)
 
 #Sinistralidade
-premios_ganhos <- sum(arq_casco_comp$PREMIO1)
+premios_ganhos <- sum(arq_casco_comp$PREMIO1, na.rm = TRUE)
 soma_indeniz_total <- sum(soma_indeniz1, 
                           soma_indeniz2, 
                           soma_indeniz3, 

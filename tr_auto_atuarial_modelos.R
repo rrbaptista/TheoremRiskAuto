@@ -1,3 +1,4 @@
+library(readr)
 
 #Lê argumento da linha de comando com o dataset a ser tratado
 argumentos <- commandArgs(trailingOnly = TRUE)
@@ -12,7 +13,11 @@ message("TheoremRisk - Seguro Auto - Versão 1.0")
 message("-------------------------------------------")
 message(cat("Lendo e analisando os dados do dataset", argumentos[1]))
 message("Isso pode durar alguns minutos, aguarde.")
-arq_casco_comp <- read.csv(argumentos[1])
+arq_casco_comp <- read_delim(argumentos[1], 
+                             delim = ";", escape_double = FALSE, 
+                             locale = locale(decimal_mark = ",", 
+                                             grouping_mark = "."), 
+                             trim_ws = TRUE)
 
 #Cria a variável com o código FIPE dos modelos
 listamodelos <-  as.factor(arq_casco_comp$COD_MODELO)
