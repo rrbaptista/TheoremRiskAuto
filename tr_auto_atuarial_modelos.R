@@ -1,4 +1,5 @@
 library(readr)
+library(dplyr)
 
 #Lê argumento da linha de comando com o dataset a ser tratado
 argumentos <- commandArgs(trailingOnly = TRUE)
@@ -21,6 +22,11 @@ arq_casco_comp <- read_delim(argumentos[1],
 
 #Cria a variável com o código FIPE dos modelos
 listamodelos <-  as.factor(arq_casco_comp$COD_MODELO)
+
+lista_nome_modelos <- read_delim("auto2_vei.csv", 
+                                 delim = ";", escape_double = FALSE, locale = locale(encoding = "ISO-8859-1"), 
+                                 trim_ws = TRUE)
+names(lista_nome_modelos)[names(lista_nome_modelos) == 'DESCRICAO'] <- 'MODELO'
 
 #Faz os cálculos temporários para chegar ao prêmio de risco por modelo
 output_somacarteira <- data.frame(tapply(arq_casco_comp$COD_MODELO, INDEX = listamodelos, FUN = "length"))
@@ -98,9 +104,13 @@ colnames(exposicaomedia_modelo) <- c("Valor")
 
 #Compila os resultados
 tbl_estatisticas_modelo <- round(data.frame(c(sinistralidade_modelo), c(ismedia_modelo), c(exposicaomedia_modelo)), digits = 2)
-rownames(tbl_estatisticas_modelo) <- levels(listamodelos)
-colnames(tbl_estatisticas_modelo) <- c("Sinistralidade", "IS Média", "Exposição Média")
-write.csv(tbl_estatisticas_modelo, "estatisticas_modelos.csv")
+tbl_estatisticas_modelo$FIPE <- levels(listamodelos)
+colnames(tbl_estatisticas_modelo) <- c("Sinistralidade", "IS Média", "Exposição Média", "FIPE")
+
+#Join com os nomes no lugar da FIPE
+tbl_estatisticas_modelo <- left_join(tbl_estatisticas_modelo, lista_nome_modelos[, c(1, 2)], by = c('FIPE' = 'CODIGO'))
+
+write.csv(tbl_estatisticas_modelo, "estatisticas_modelos.csv", row.names = FALSE)
 message("Estatísticas dos modelos compiladas em 'estatisticas_modelos.csv'")
 
 #Prossegue para o script de cálculo de prêmio bruto

@@ -46,7 +46,6 @@ tbl_premiofinal <- round(data.frame(c(premio_bruto1),
                                     c(premio_bruto4), 
                                     c(premio_bruto9)), digits = 2)
 
-rownames(tbl_premiofinal) <- levels(listamodelos)
 colnames(tbl_premiofinal) <- c("Roubo e Furto", 
                                "Colisão Parcial", 
                                "Colisão Perda Total", 
@@ -60,7 +59,11 @@ tbl_premiofinal$Compreensivo <- tbl_premiofinal$`Roubo e Furto` +
                                 tbl_premiofinal$Incêndio +
                                 tbl_premiofinal$`Assistência 24H`
 
-write.csv(tbl_premiofinal, "resultados_modelos.csv")
+tbl_premiofinal$FIPE <- levels(listamodelos)
+
+tbl_premiofinal <- left_join(tbl_premiofinal, lista_nome_modelos[, c(1, 2)], by = c('FIPE' = 'CODIGO'))
+
+write.csv(tbl_premiofinal, "resultados_modelos.csv", row.names = FALSE)
 
 #Fim do script
 message("Prêmios de seguro ao consumidor final calculados! Veja os resultados em 'resultados_modelos.csv'")
